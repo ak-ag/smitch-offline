@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/badge/Release-v2.2.2--offline-blue.svg)](https://github.com/ak-ag/smitch-offline/releases)
 [![Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://github.com/ak-ag/smitch-offline)
+[![YouTube](https://img.shields.io/badge/YouTube-Watch%20Demo-red.svg?logo=youtube)](https://youtube.com/shorts/azQOjrDOdtY?feature=share)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![Author](https://img.shields.io/badge/Modified%20by-ak--ag-purple.svg)](https://github.com/ak-ag)
 
@@ -11,11 +12,13 @@
 
 ## 📺 Video Demonstration
 
-A full demonstration showing live offline connection and color control of a Smitch RGB Bulb:
+Watch the live demonstration showing offline pairing, connection, and RGB color control of a Smitch Smart Bulb:
 
-![Smitch Demo Video](demo_recording.mp4)
+[![Smitch Offline YouTube Demo](https://img.shields.io/badge/YouTube%20Shorts-Watch%20Live%20Demo-red?style=for-the-badge&logo=youtube)](https://youtube.com/shorts/azQOjrDOdtY?feature=share)
 
-*(Click to view or play the attached [`demo_recording.mp4`](demo_recording.mp4) video)*
+▶️ **Watch on YouTube:** [https://youtube.com/shorts/azQOjrDOdtY](https://youtube.com/shorts/azQOjrDOdtY?feature=share)
+
+*(You can also download or view the high-definition recording directly from this repository: [`demo_recording.mp4`](demo_recording.mp4))*
 
 ---
 
@@ -56,7 +59,44 @@ adb shell am start -n com.mysmitch.android/.MainActivity
 
 ---
 
-## 💡 How It Works
+## ⚠️ Important Usage Notes
+
+- **App Launch Time**: The app may take a moment to initialize on its first run — please be patient while local SQLite tables and background services spin up.
+- **Navigation Tip**: If you ever get stuck or cannot navigate back, simply swipe close the app from your phone's **Recent Apps / App Switcher** and reopen it.
+- **Wi-Fi Network Compatibility**: Smitch hardware microcontrollers exclusively communicate over **2.4 GHz Wi-Fi** (802.11 b/g/n). 5 GHz-only Wi-Fi networks will not connect.
+- **Bulb Wi-Fi Visibility**:
+  - When the bulb is turned on, its setup Wi-Fi network (`Smitch_v1...`) should appear in your phone's Wi-Fi settings.
+  - **If the hotspot is NOT visible**: Reset the bulb by toggling the physical wall switch **OFF and ON 5 to 8 times** with a **2-second gap** between each switch until the bulb flashes rapidly, then check your phone's Wi-Fi list again.
+  - **Previously Connected Bulbs**: If your bulb was already connected to your home Wi-Fi, it will not broadcast its setup hotspot. In that case, follow the **Factory Reset Steps** below to reset and re-detect it.
+
+---
+
+## 🔄 Step-by-Step Setup & Factory Reset Guide
+
+Follow these exact steps if setting up a new bulb or recovering an existing bulb:
+
+1. **Open the Smitch app**:
+   - Tap the **`+` (Plus)** button on the top right.
+   - If a confirmation dialog appears asking to search for another bulb, tap **"Search"**.
+   - You should now see the **`WELCOME TO SMITCH`** screen.
+2. **Tap the Right Arrow (`→`)** at the bottom to proceed to device selection.
+3. **Select Product**:
+   - Tap on the **Smart Bulb** icon.
+   - Tap **Next**.
+4. **Tap Next again** on the setup preparation screen.
+5. **Start Configuration**:
+   - The app will display *"Start configuration"* and attempt to locate your device.
+   - **If found**: You will see the connection method screen &rarr; select **"Connect directly"**.
+6. **If NOT found**:
+   - Tap the **Settings Gear (⚙️)** on the top right of the configuration screen.
+   - Scroll down to the **"Factory Reset Device"** option.
+   - Try **both methods**:
+     - **Method 1**: Smitch Wi-Fi Connection (connect to the bulb's direct hotspot).
+     - **Method 2**: Home Wi-Fi Connection (if bulb is already attached to your router).
+
+---
+
+## 💡 How the Offline Patch Works
 
 When Smitch servers shut down, the original application failed at startup because:
 1. `landCtrl` tried to validate credentials against dead REST endpoints (`52.86.34.244` / `api.mysmitch.com`).
@@ -94,19 +134,6 @@ If you want to inspect or build the patch yourself:
    - Recompile the APK using Apktool.
    - Sign and zipalign the APK using `uber-apk-signer` (v1/v2/v3 signatures).
    - Generate `smitch_offline.apk`.
-
----
-
-## ❓ Troubleshooting & Tips
-
-- **Bulb Not Detected?**
-  - Reset your Smitch bulb into pairing mode (power cycle the wall switch On-Off-On-Off-On until the bulb rapidly flashes).
-  - Connect your phone to the bulb's Wi-Fi hotspot (`Smitch_v1...`).
-  - Open the app, configure your Wi-Fi credentials, and control it directly.
-- **App Shows White Screen?**
-  - Make sure you uninstalled the older original Smitch app first before installing `smitch_offline.apk`.
-- **Router Compatibility**:
-  - Smitch smart home hardware only supports **2.4 GHz Wi-Fi** networks (802.11 b/g/n). Ensure your Wi-Fi network has 2.4 GHz enabled.
 
 ---
 
