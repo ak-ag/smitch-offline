@@ -1,0 +1,13 @@
+# Build and decompilation artifacts
+smitch_decoded/
+smitch_build/
+smitch_offline_unsigned.apk
+smitch.apk
+*.apk.original
+*.keystore
+
+# Scratch scripts & temp files
+scratch/
+*.tmp
+*.log
+*.idsig
